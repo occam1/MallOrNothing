@@ -1,8 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/Http';
-import {item} from './items';
+import {item} from './item';
 import { Observable } from 'rxjs';
-import {catchError, retry} from 'rxjs/operators';
+import {catchError, retry, map} from 'rxjs/operators';
 
 
 @Component({
@@ -16,8 +16,12 @@ import {catchError, retry} from 'rxjs/operators';
 })
 export class ItemComponent implements OnInit {
   itemString: string;
+ myData :any =  [];
   stuff: Object;
-  myItems: item[];
+  myItem: item;
+  object_name = new Observable((observer) => {
+    observer.next();
+  })
 
   constructor(private http: HttpClient) { 
     const headerDict = {'Content-Type':'application/json',
@@ -28,18 +32,33 @@ export class ItemComponent implements OnInit {
       
     //get the items
     console.log('calling api');
-    this.stuff = this.http.get<item>( 'http://localhost:4200/api/Item/GetItems',   
-    {headers : aheaders}).subscribe(res=>console.log(res.description));
-    console.log('called api')
-    
-    console.log(this.stuff);
-    this.itemString = this.stuff.toString();
-    console.log(this.itemString);
-
+    //this.stuff = this.http.get<item>( 'http://localhost:4200/api/Item/GetItems',   
+    //{headers : aheaders}).subscribe((res)=>console.log(res.description));
+    console.log('showing data');
+    this.getData();
   }
 
   ngOnInit(): void {
 
   }
-
+  getData(){
+    console.log('start of getData');
+    this.http.get<item>( 'http://localhost:4200/api/Item/GetItems',   
+    ).toPromise().then( data => {  
+        for (let key in data)
+          {
+           if (data.hasOwnProperty(key))
+           { 
+            this.myData.push(data[key])
+           }
+          } 
+          console.log('before stringify');
+          this.itemString = JSON.stringify(this.myData[0]);
+          
+          console.log('after stringify');
+          this.myItem = JSON.parse(this.itemString);
+          console.log('after parse');
+          console.log('myData ends');
+        })
+     }
 }

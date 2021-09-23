@@ -1,14 +1,14 @@
-export class item {
-itemId: number;
-personId: number;
+export interface item {
+id: number;
+dealerId: number;
 name: string;
+keywords: string;
 description: string;
+manufacturer: string;
+manufacturingLine: string;
 cost: number;
 currentPrice: number;
 minimumPrice: number;
-manufacturer: string;
-manufacturingLine: string;
-keywords: string;
 pricingPlanId: number;
 isAvailable: boolean;
 soldDate: string;
@@ -16,8 +16,4 @@ soldPrice: number;
 isShippable: boolean;
 locationId: number;
 quantity: number;
-createdBy: number;
-createdOn: string;
-changedBy: number;
-changedOn: string;
 }
