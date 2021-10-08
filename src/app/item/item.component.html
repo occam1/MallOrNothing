@@ -1,9 +1,68 @@
-<p>item works!</p>
-<p>Item information: {{itemString}}</p>
+<h1>Add A New Item</h1>
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+  <div >
+    <label for="dealerId">Enter your DealerId: </label>
+    <input type="text" formControlName="dealerId"  placeholder="required" >
+  </div>
+    <div >
+      <label for="itemName">Enter the Item Name: </label>
+      <input type="text" formControlName="Name"   placeholder="required" >
+    </div>
+    <div >
+      <label for="description">Enter the Item Description: </label>
+      <input type="text" formControlName="description"  placeholder="required" >
+    </div> 
+    <div >
+      <label for="keywords">Enter your Keywords (comma separated): </label>
+      <input type="text" formControlName="keywords" placeholder="required" >
+    </div>   
+    <div >
+      <label for="manufacturer">Enter the Item manufacturer: </label>
+      <input type="text" formControlName="manufacturer" >
+    </div>   
+    <div  >
+      <label for="manufacturingLine">Enter the manufacturingLine: </label>
+      <input type="text" formControlName="manufacturingLine"  >
+    </div>
+    <div >
+      <label for="cost">Enter the Item Cost: </label>
+      <input type="number" formControlName="cost"  >
+    </div>
+    <div >
+      <label for="currentPrice">Enter the desired Item Price: </label>
+      <input type="number" formControlName="currentPrice" >
+    </div>
+    <div  >
+      <label for="minimumPrice">Enter the minimum Item Price: </label>
+      <input type="number" formControlName="minimumPrice" >
+    </div>
+    <div >
+      <label for="pricingPlanId">Enter the Pricing Plan: </label>
+      <input type="number" formControlName="pricingPlanId" >
+    </div>
+    <div >
+      <label for="isAvailable">Is the item ready to sell?: </label>
+      <input type="checkbox" formControlName="isAvailable" >
+    </div>
+    <div  >
+      <label for="isShippable">Are you willing to ship?: </label>
+      <input type="checkbox" formControlName="isShippable" >
+    </div>
+    <div  >
+      <label for="quantity">How many identical items?: </label>
+      <input type="number" formControlName="quantity" >
+    </div>
 
-<p>Name: {{myItem?.name}}</p>
-
-<p>Description: {{myItem?.description}}</p>
-
-<p> Current Price: {{myItem?.currentPrice}}</p>
-<app-item-detail></app-item-detail>
+    <!--div  >
+      <label for="soldDate">When did the item sell?: </label>
+      <input type="date" formControlName="soldDate" >
+    </div>
+    <div >
+      <label for="soldPrice">What did the item sell for?: </label>
+      <input type="number" formControlName="soldPrice" >
+    </div-->   
+     <div  >
+      <input type="submit" value="Add Item" >
+    </div>
+  </form>
+ <app-item-detail></app-item-detail> 

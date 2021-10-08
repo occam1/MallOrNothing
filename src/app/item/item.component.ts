@@ -1,9 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
+import {FormGroup, FormBuilder} from '@angular/forms';
 import {HttpClient,HttpHeaders} from '@angular/common/Http';
 import {item} from './item';
-import { Observable } from 'rxjs';
-import {catchError, retry, map} from 'rxjs/operators';
-
+import { ItemDetailComponent } from '../item-detail/item-detail.component';
 
 @Component({
   selector: 'app-item',
@@ -15,50 +14,48 @@ import {catchError, retry, map} from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ItemComponent implements OnInit {
-  itemString: string;
- myData :any =  [];
-  stuff: Object;
-  myItem: item;
-  object_name = new Observable((observer) => {
-    observer.next();
-  })
+  itemForm: FormGroup;
+  postData: object;
 
-  constructor(private http: HttpClient) { 
-    const headerDict = {'Content-Type':'application/json',
-      'Accept':'application/json', 'Access-Control-Allow-Headers':'Content-Type',
-      'Access-Control-Allow-Origin':'http://localhost:5000/*',};
-    console.log(headerDict);
-      const aheaders = new HttpHeaders(headerDict);
-      
-    //get the items
-    console.log('calling api');
-    //this.stuff = this.http.get<item>( 'http://localhost:4200/api/Item/GetItems',   
-    //{headers : aheaders}).subscribe((res)=>console.log(res.description));
-    console.log('showing data');
-    this.getData();
+  constructor(private fb: FormBuilder, private http:HttpClient, 
+    private idc: ItemDetailComponent) { 
+     console.log("in constructor of Item")
+   }
+
+  ngOnInit()
+  { 
+    this.initializeForm();
   }
-
-  ngOnInit(): void {
-
+  initializeForm(): void
+  {
+    this.itemForm = this.fb.group({
+      dealerId: 57,
+      Name: '',
+      description: '',
+      keywords:  '',
+      manufacturer:  '',
+      manufacturingLine: '',
+      cost:  0,
+      currentPrice:  0,
+      minimumPrice:  0,
+      pricingPlanId:  0,
+      isAvailable: true,
+      isShippable: true,
+      quantity:  0,
+      //soldDate:  '',
+      //soldPrice:  0
+    })
   }
-  getData(){
-    console.log('start of getData');
-    this.http.get<item>( 'http://localhost:4200/api/Item/GetItems',   
-    ).toPromise().then( data => {  
-        for (let key in data)
-          {
-           if (data.hasOwnProperty(key))
-           { 
-            this.myData.push(data[key])
-           }
-          } 
-          console.log('before stringify');
-          this.itemString = JSON.stringify(this.myData[0]);
-          
-          console.log('after stringify');
-          this.myItem = JSON.parse(this.itemString);
-          console.log('after parse');
-          console.log('myData ends');
-        })
-     }
+  onSubmit()
+  {
+    this.postData = this.itemForm.value;
+    console.log(this.itemForm);
+    console.log(this.postData);
+    this.http.post('http://localhost:4200/api/Item/InsertItem1/', this.postData)
+    .toPromise().then(data=>{console.log(data)});
+    this.idc.getData();
+  }
+    
+    
+   // 
 }

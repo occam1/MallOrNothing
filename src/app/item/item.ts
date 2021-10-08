@@ -2,8 +2,8 @@ export interface item {
 id: number;
 dealerId: number;
 name: string;
-keywords: string;
 description: string;
+keywords: string;
 manufacturer: string;
 manufacturingLine: string;
 cost: number;
@@ -14,6 +14,5 @@ isAvailable: boolean;
 soldDate: string;
 soldPrice: number;
 isShippable: boolean;
-locationId: number;
 quantity: number;
 }

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {HttpClientModule, HttpClient} from '@angular/common/http';
-
+import {ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,11 +33,13 @@ import { FurnitureItemComponent } from './furniture-item/furniture-item.componen
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([{path:"Dealer",component:DealerComponent},
         {path:"Furniture",component:FurnitureComponent},
         {path:"Booth",component:BoothComponent},
         {path:"Item",component:ItemComponent},
+        {path:"ItemDetail",component:ItemDetailComponent},
         {path:"Store",component:StoreComponent}
         
   ])
