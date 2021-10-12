@@ -1,4 +1,4 @@
-export interface item {
+export class item {
 id: number;
 dealerId: number;
 name: string;

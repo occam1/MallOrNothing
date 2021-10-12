@@ -19,8 +19,6 @@ export interface ItemDetailTableItem {
   minimumPrice: number;
   pricingPlanId: number;
   isAvailable: boolean;
-  soldDate: string;
-  soldPrice: number;
   isShippable: boolean;
   quantity: number;
   
@@ -28,12 +26,12 @@ export interface ItemDetailTableItem {
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: ItemDetailTableItem[] = [
-  {id: 1, dealerId: 57, name: 'Hydrogen',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1  },
-  {id: 2, dealerId: 57, name: 'Helium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1 },
-  {id: 3,dealerId: 57,  name: 'Lithium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1 },
-  {id: 4,dealerId: 57,  name: 'Beryllium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1 },
-  {id: 5,dealerId: 57,  name: 'Boron',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1 },
-  {id: 6,dealerId: 57,  name: 'Carbon',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1 },
+  {id: 1, dealerId: 57, name: 'Hydrogen',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1  },
+  {id: 2, dealerId: 57, name: 'Helium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1 },
+  {id: 3,dealerId: 57,  name: 'Lithium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1 },
+  {id: 4,dealerId: 57,  name: 'Beryllium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1 },
+  {id: 5,dealerId: 57,  name: 'Boron',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1 },
+  {id: 6,dealerId: 57,  name: 'Carbon',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1 },
 ];
 
 
@@ -42,14 +40,15 @@ const EXAMPLE_DATA: ItemDetailTableItem[] = [
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class ItemDetailTableDataSource extends DataSource<item> {
-  data: item[] = [];
+export class ItemDetailTableDataSource extends DataSource<ItemDetailTableItem> {
+  data: ItemDetailTableItem[] = EXAMPLE_DATA;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
+  myItems: item [] = [];
   anItem: item = {id: 1, dealerId: 57, name: 'Hydrogen',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1 ,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1  }
   ;
 
-  constructor(private myItems : item []) { 
+  constructor() {
     super();
     
     EXAMPLE_DATA.forEach(aRow => 
@@ -58,10 +57,9 @@ export class ItemDetailTableDataSource extends DataSource<item> {
         console.log(aRow);
         console.log(aRow.id);
         console.log('after aRow');
-        this.anItem = new item();
          this.anItem.id = aRow.id;
          this.anItem.dealerId = aRow.dealerId;
-         this.anItem.name = 'ima_' + aRow.name;
+         this.anItem.name = aRow.name;
          this.anItem.description = aRow.description;
          this.anItem.keywords = aRow.keywords;
          this.anItem.manufacturer = aRow.manufacturer;
@@ -78,7 +76,6 @@ export class ItemDetailTableDataSource extends DataSource<item> {
       });
       console.log('my items - populated');
       console.log(this.myItems);
-      this.data = this.myItems;
   }
 
   /**
@@ -86,7 +83,7 @@ export class ItemDetailTableDataSource extends DataSource<item> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<item[]> {
+  connect(): Observable<ItemDetailTableItem[]> {
     if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update
       // stream for the data-table to consume.
