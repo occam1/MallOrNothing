@@ -17,6 +17,10 @@ import { ItemComponent } from './item/item.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { FurnitureItemComponent } from './furniture-item/furniture-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ItemDetailTableComponent } from './item-detail-table/item-detail-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SurfaceAreaComponent,
     ItemComponent,
     ItemDetailComponent,
-    FurnitureItemComponent
+    FurnitureItemComponent,
+    ItemDetailTableComponent
   ],
   imports: [
     BrowserModule,
@@ -41,10 +46,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         {path:"Booth",component:BoothComponent},
         {path:"Item",component:ItemComponent},
         {path:"ItemDetail",component:ItemDetailComponent},
+        {path:"ItemDetailTable",component:ItemDetailTableComponent},
         {path:"Store",component:StoreComponent}
         
   ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
     /* AppRoutingModule */
   ],
   providers: [HttpClient],
