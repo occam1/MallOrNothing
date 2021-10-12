@@ -16,6 +16,7 @@ import { SurfaceAreaComponent } from './surface-area/surface-area.component';
 import { ItemComponent } from './item/item.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { FurnitureItemComponent } from './furniture-item/furniture-item.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { FurnitureItemComponent } from './furniture-item/furniture-item.componen
         {path:"ItemDetail",component:ItemDetailComponent},
         {path:"Store",component:StoreComponent}
         
-  ])
+  ]),
+    BrowserAnimationsModule
     /* AppRoutingModule */
   ],
   providers: [HttpClient],
