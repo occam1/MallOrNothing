@@ -4,6 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { ItemDetailTableDataSource } from './item-detail-table-datasource';
 import { item } from '../item/item';
+import { ItemService } from '../item/item.service';
+
 @Component({
   selector: 'app-item-detail-table', 
   templateUrl: './item-detail-table.component.html',
@@ -14,16 +16,15 @@ export class ItemDetailTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<item>;
   dataSource: ItemDetailTableDataSource;
-  myItems : item [] = [];
+  myItems : item [] = []; 
   anItem : item;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name','dealerId','cost'];
+  displayedColumns = ['id', 'name','dealerId','cost','CurrentPrice'];
 
-  constructor() {
+  constructor(private ids : ItemService) {
 
     this.anItem = new item();
-    this.anItem ={id: 7, dealerId: 57, name: 'thulium',description:'metalhydride',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1 ,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:2};
-    this.myItems.push(this.anItem)
+    this.myItems = this.ids.getData();
     this.dataSource = new ItemDetailTableDataSource(this.myItems);
   }
 

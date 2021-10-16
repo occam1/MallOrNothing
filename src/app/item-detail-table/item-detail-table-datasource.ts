@@ -52,7 +52,7 @@ export class ItemDetailTableDataSource extends DataSource<item> {
   constructor(private myItems : item []) { 
     super();
     
-    EXAMPLE_DATA.forEach(aRow => 
+    /* EXAMPLE_DATA.forEach(aRow => 
       {
         console.log('aRow');
         console.log(aRow);
@@ -78,6 +78,7 @@ export class ItemDetailTableDataSource extends DataSource<item> {
       });
       console.log('my items - populated');
       console.log(this.myItems);
+      */
       this.data = this.myItems;
   }
 

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +21,8 @@ import { ItemDetailTableComponent } from './item-detail-table/item-detail-table.
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { AddAuthHeader } from 'src/addAuthHeader';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { MatSortModule } from '@angular/material/sort';
     ItemComponent,
     ItemDetailComponent,
     FurnitureItemComponent,
-    ItemDetailTableComponent
+    ItemDetailTableComponent,
+    AuthenticateComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,13 @@ import { MatSortModule } from '@angular/material/sort';
     MatSortModule
     /* AppRoutingModule */
   ],
-  providers: [HttpClient],
+  providers: [HttpClient,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AddAuthHeader,
+    multi: true  
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -49,8 +49,10 @@ export class ItemComponent implements OnInit {
   onSubmit()
   {
     this.postData = this.itemForm.value;
+    console.log('adding item')
     console.log(this.itemForm);
     console.log(this.postData);
+    console.log('adding item1')
     this.http.post('http://localhost:4200/api/Item/InsertItem1/', this.postData)
     .toPromise().then(data=>{console.log(data)});
     this.idc.getData();
