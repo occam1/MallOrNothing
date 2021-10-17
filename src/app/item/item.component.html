@@ -1,12 +1,13 @@
 <h1>Add A New Item</h1>
 <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
   <div >
+    <span >{{itemChanged}}</span>
     <label for="dealerId">Enter your DealerId: </label>
     <input type="text" formControlName="dealerId"  placeholder="required" >
   </div>
     <div >
-      <label for="itemName">Enter the Item Name: </label>
-      <input type="text" formControlName="Name"   placeholder="required" >
+      <label for="inventoryNumber">Enter the InventoryNumber: </label>
+      <input type="text" formControlName="inventoryNumber"   placeholder="required" >
     </div>
     <div >
       <label for="description">Enter the Item Description: </label>
@@ -49,6 +50,10 @@
       <input type="checkbox" formControlName="isShippable" >
     </div>
     <div  >
+      <label for="collectionName">Collection Name: </label>
+      <input type="text" formControlName="collectionName" >
+    </div>
+    <div  >
       <label for="quantity">How many identical items?: </label>
       <input type="number" formControlName="quantity" >
     </div>
@@ -65,4 +70,4 @@
       <input type="submit" value="Add Item" >
     </div>
   </form>
- <app-item-detail></app-item-detail> 
+ <app-item-detail [itemChanged]="itemChanged"></app-item-detail> 

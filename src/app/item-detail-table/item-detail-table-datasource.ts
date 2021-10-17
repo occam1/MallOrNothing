@@ -9,7 +9,7 @@ import { item } from '../item/item';
 export interface ItemDetailTableItem {
   id: number;
   dealerId: number;
-  name: string;
+  inventoryNumber: string;
   description: string;
   keywords: string;
   manufacturer: string;
@@ -22,18 +22,19 @@ export interface ItemDetailTableItem {
   soldDate: string;
   soldPrice: number;
   isShippable: boolean;
+  collectionName: string;
   quantity: number;
   
 }
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: ItemDetailTableItem[] = [
-  {id: 1, dealerId: 57, name: 'Hydrogen',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1  },
-  {id: 2, dealerId: 57, name: 'Helium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1 },
-  {id: 3,dealerId: 57,  name: 'Lithium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1 },
-  {id: 4,dealerId: 57,  name: 'Beryllium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1 },
-  {id: 5,dealerId: 57,  name: 'Boron',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1 },
-  {id: 6,dealerId: 57,  name: 'Carbon',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1 },
+  {id: 1, dealerId: 57, inventoryNumber: 'Hydrogen',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,collectionName:'',quantity:1  },
+  {id: 2, dealerId: 57, inventoryNumber: 'Helium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,collectionName:'',quantity:1 },
+  {id: 3,dealerId: 57,  inventoryNumber: 'Lithium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,collectionName:'',quantity:1 },
+  {id: 4,dealerId: 57,  inventoryNumber: 'Beryllium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,collectionName:'',quantity:1 },
+  {id: 5,dealerId: 57,  inventoryNumber: 'Boron',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,collectionName:'',quantity:1 },
+  {id: 6,dealerId: 57,  inventoryNumber: 'Carbon',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,collectionName:'',quantity:1 },
 ];
 
 
@@ -46,7 +47,7 @@ export class ItemDetailTableDataSource extends DataSource<item> {
   data: item[] = [];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
-  anItem: item = {id: 1, dealerId: 57, name: 'Hydrogen',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1 ,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1  }
+  anItem: item = {id: 1, dealerId: 57, inventoryNumber: 'Hydrogen',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1 ,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,collectionName:'',quantity:1  }
   ;
 
   constructor(private myItems : item []) { 
@@ -131,8 +132,10 @@ export class ItemDetailTableDataSource extends DataSource<item> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
+        case 'inventoryNumber': return compare(a.inventoryNumber, b.inventoryNumber, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
+        case 'cost': return compare(+a.cost, +b.cost, isAsc);
+        case 'currentPrice': return compare(+a.currentPrice, +b.currentPrice, isAsc);
         default: return 0;
       }
     });

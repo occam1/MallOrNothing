@@ -26,6 +26,8 @@ export class AuthenticateComponent implements OnInit {
     })
   }
   onSubmit(){
+    
+    localStorage.removeItem('JWT');
     console.log('Authenticate');
     
     console.log('userForm');

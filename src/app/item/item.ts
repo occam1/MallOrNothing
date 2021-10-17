@@ -1,7 +1,7 @@
 export class item {
 id: number;
 dealerId: number;
-name: string;
+inventoryNumber: string;
 description: string;
 keywords: string;
 manufacturer: string;
@@ -14,5 +14,6 @@ isAvailable: boolean;
 soldDate: string;
 soldPrice: number;
 isShippable: boolean;
+collectionName: string;
 quantity: number;
 }
