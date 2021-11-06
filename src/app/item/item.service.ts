@@ -64,4 +64,10 @@ itemSelectedEvent = new EventEmitter<item>();
       this.itemSelectedEvent.emit(this.selectedItem);
         
       }
+      insertItem(newItem){
+        this.http.post('http://localhost:4200/api/Item/InsertItem1/', newItem)
+        .subscribe(data=>{console.log(data)},
+        error => console.log(error));
+
+      }
 }
