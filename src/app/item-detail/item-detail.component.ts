@@ -18,7 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ItemDetailComponent implements OnInit, OnChanges{
   itemString: string;
  myData :any =  [];
- @Input() itemChanged: number;
+// @Input() itemChanged: number;
  token : string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im1hcmtfYV9oYWxsQHlhaG9vLmNvbSIsInJvbGUiOiIxLDEiLCJuYmYiOjE2MzQ0ODc1NjEsImV4cCI6MTYzNDU3Mzk2MSwiaWF0IjoxNjM0NDg3NTYxfQ.HkOu0vHJNKeZTeQ2jObVyb9NkoxgHYndHbOzIEcOIU';
  auth : string = 'Bearer ' + this.token;
  headers={

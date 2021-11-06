@@ -23,6 +23,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { AddAuthHeader } from 'src/addAuthHeader';
+import { ItemPictureComponent } from './item/item-picture/item-picture.component';
+import { ItemListComponent } from './item-list/item-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { AddAuthHeader } from 'src/addAuthHeader';
     ItemDetailComponent,
     FurnitureItemComponent,
     ItemDetailTableComponent,
-    AuthenticateComponent
+    ItemPictureComponent,
+    AuthenticateComponent,
+    ItemListComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,9 @@ import { AddAuthHeader } from 'src/addAuthHeader';
         {path:"Item",component:ItemComponent},
         {path:"ItemDetail",component:ItemDetailComponent},
         {path:"ItemDetailTable",component:ItemDetailTableComponent},
-        {path:"Store",component:StoreComponent}
+        {path:"ItemPicture", component:ItemPictureComponent},
+        {path:"Store",component:StoreComponent},
+        {path:"ItemList",component:ItemListComponent}
         
   ]),
     BrowserAnimationsModule,

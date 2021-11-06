@@ -45,8 +45,7 @@ export class ItemDetailTableDataSource extends DataSource<ItemDetailTableItem> {
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
   myItems: item [] = [];
-  anItem: item = {id: 1, dealerId: 57, name: 'Hydrogen',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1 ,isAvailable:true,soldDate: '12/25/1998',soldPrice:1,isShippable:true,quantity:1  }
-  ;
+   ;
 
   constructor() {
     super();
@@ -57,22 +56,7 @@ export class ItemDetailTableDataSource extends DataSource<ItemDetailTableItem> {
         console.log(aRow);
         console.log(aRow.id);
         console.log('after aRow');
-         this.anItem.id = aRow.id;
-         this.anItem.dealerId = aRow.dealerId;
-         this.anItem.name = aRow.name;
-         this.anItem.description = aRow.description;
-         this.anItem.keywords = aRow.keywords;
-         this.anItem.manufacturer = aRow.manufacturer;
-         this.anItem.manufacturingLine = aRow.manufacturingLine;
-         this.anItem.cost = aRow.cost;
-         this.anItem.currentPrice = aRow.currentPrice;
-         this.anItem.minimumPrice = aRow.minimumPrice;
-         this.anItem.pricingPlanId = aRow.pricingPlanId;
-         this.anItem.isAvailable = aRow.isAvailable;
-         this.anItem.isShippable = aRow.isShippable;
-         this.anItem.quantity = aRow.quantity;
-         console.log(this.anItem);
-         this.myItems.push(this.anItem);
+
       });
       console.log('my items - populated');
       console.log(this.myItems);

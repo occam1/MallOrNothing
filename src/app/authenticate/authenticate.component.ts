@@ -21,8 +21,8 @@ export class AuthenticateComponent implements OnInit {
   initializeForm(): void
   {
     this.userForm = this.fb.group({
-      userId: 'test1',
-      password: 'password1'
+      userId: 'mark_a_hall@yahoo.com',
+      password: 'Ial4hfoh'
     })
   }
   onSubmit(){

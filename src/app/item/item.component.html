@@ -1,7 +1,7 @@
-<h1>Add A New Item</h1>
+<h1>Add/Update An Item</h1>
 <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
   <div >
-    <span >{{itemChanged}}</span>
+    <!--span >{{itemChanged}}</span-->
     <label for="dealerId">Enter your DealerId: </label>
     <input type="text" formControlName="dealerId"  placeholder="required" >
   </div>
@@ -67,7 +67,7 @@
       <input type="number" formControlName="soldPrice" >
     </div-->   
      <div  >
-      <input type="submit" value="Add Item" >
+      <input type="submit" value={{btnFunction}} >
     </div>
   </form>
- <app-item-detail [itemChanged]="itemChanged"></app-item-detail> 
+<!--app-item-detail [itemChanged]="itemChanged"></app-item-detail--> 

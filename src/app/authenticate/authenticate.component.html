@@ -1,5 +1,4 @@
 <h1>Please Enter Your Credentials</h1>
-<!--form  (ngSubmit)="onSubmit()"-->
 <form name="fff" id="fff" [formGroup]="userForm"   (ngSubmit)="onSubmit()">
 
 <div  >
@@ -7,7 +6,7 @@
   <input type="text" formControlName="userId"  >
 </div>
 <div> 
-   <label for="userId">Enter the password: </label>
+   <label for="password">Enter the password: </label>
   <input type="password" name="password"  formControlName="password" 
   id="password" autocomplete="current-password">
 </div>

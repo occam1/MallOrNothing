@@ -5,13 +5,12 @@ import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { item } from '../item/item';
 
-
-
+// TODO: Replace this with your own data model type
 
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: item[] = [
-  {id: 1, dealerId: 57, inventoryNumber: 'Hydrogen',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1,collectionName:null  },
+  {id: 1, dealerId: 57, inventoryNumber: 'S0000',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1,collectionName:null  },
   {id: 2, dealerId: 57, inventoryNumber: 'Helium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1,collectionName:null },
   {id: 3,dealerId: 57,  inventoryNumber: 'Lithium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1,collectionName:null },
   {id: 4,dealerId: 57,  inventoryNumber: 'Beryllium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1 ,soldDate:null,soldPrice:1,collectionName:null},
@@ -19,25 +18,20 @@ const EXAMPLE_DATA: item[] = [
   {id: 6,dealerId: 57,  inventoryNumber: 'Carbon',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1 ,soldDate:null,soldPrice:1,collectionName:null},
 ];
 /**
- * Data source for the ItemDetailTable view. This class should
+ * Data source for the ItemList view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class ItemDetailTableDataSource extends DataSource<item> {
+export class ItemListDataSource extends DataSource<item> {
   data: item[] = [];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
- 
 
-  constructor(private myItems : item []) { 
+  constructor(private myItems: item[]) {
     super();
-    
-    console.log('idt-ds ctor');
-      this.data = this.myItems;
-      console.log("idt-ds myItems", this.myItems);
-      console.log('idt-ds data ', this.data);
-      console.log('idt-ds ctor - leaving'); 
-      //this.data = EXAMPLE_DATA;
+    console.log("ILDS",this.myItems)
+    this.data = this.myItems;
+    console.log("ILDS data",this.data)
   }
 
   /**
@@ -54,7 +48,7 @@ export class ItemDetailTableDataSource extends DataSource<item> {
           return this.getPagedData(this.getSortedData([...this.data ]));
         }));
     } else {
-      throw Error('Please! set the paginator and sort on the data source before connecting.');
+      throw Error('Please set the paginator and sort on the data source before connecting.');
     }
   }
 
@@ -69,7 +63,6 @@ export class ItemDetailTableDataSource extends DataSource<item> {
    * this would be replaced by requesting the appropriate data from the server.
    */
   private getPagedData(data: item[]): item[] {
-    console.log("paginator ", data);
     if (this.paginator) {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       return data.splice(startIndex, this.paginator.pageSize);
@@ -90,10 +83,11 @@ export class ItemDetailTableDataSource extends DataSource<item> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-       // case 'inventoryNumber': return compare(a.inventoryNumber, b.inventoryNumber, isAsc);
+        case 'description' : return compare(a.description, b.description, isAsc);
+        case 'inventoryNumber': return compare(a.inventoryNumber, b.inventoryNumber, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
         case 'cost': return compare(+a.cost, +b.cost, isAsc);
-   //     case 'currentPrice': return compare(+a.currentPrice, +b.currentPrice, isAsc);
+        case 'currentPrice': return compare(+a.currentPrice, +b.currentPrice, isAsc);
         default: return 0;
       }
     });

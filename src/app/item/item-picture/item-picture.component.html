@@ -1,0 +1,30 @@
+<h1>Attach A Picture to an Item</h1>
+<form [formGroup]="itemPictureForm" enctype="multipart/form-data" (ngSubmit)="onFileUpload()">
+    <div>
+        <label for="itemId">Enter the Item Id: </label>
+        <input type="text" formControlName="itemId"   placeholder="required" >
+    </div>
+    <div>
+        <label for="caption1">Enter the Item Caption1: </label>
+        <input type="text" formControlName="caption1" >
+    </div>
+    <div>
+        <label for="caption2">Enter the Item Caption2: </label>
+        <input type="text" formControlName="caption2" >
+    
+    </div>   
+     <div>
+        <label for="altText">Enter the Item Alt Text: </label>
+        <input type="text" formControlName="altText" >
+    
+    </div>
+<div>
+    <label for="file">Choose the files: </label>
+    <input type=file multiple=false (change)="onFileChange($event)"
+     formControlName="file">
+</div>
+
+<div>
+    <input type="submit" value="UPLOAD">
+</div>
+</form>
