@@ -1,3 +1,4 @@
+import { ItemService } from './../item/item.service';
 import { Component, Injectable, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/Http';
 import {item} from '../item/item';
@@ -19,19 +20,14 @@ export class ItemDetailComponent implements OnInit, OnChanges{
   itemString: string;
  myData :any =  [];
 // @Input() itemChanged: number;
- token : string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im1hcmtfYV9oYWxsQHlhaG9vLmNvbSIsInJvbGUiOiIxLDEiLCJuYmYiOjE2MzQ0ODc1NjEsImV4cCI6MTYzNDU3Mzk2MSwiaWF0IjoxNjM0NDg3NTYxfQ.HkOu0vHJNKeZTeQ2jObVyb9NkoxgHYndHbOzIEcOIU';
- auth : string = 'Bearer ' + this.token;
- headers={
-   headers: new HttpHeaders({
-       'Content-Type': 'application/json',
-       "Authorization": this.auth})
-   };
+obItem : Observable<item[]>;
+myItems : item[] = [];
   myItem: item;
   object_name = new Observable((observer) => {
     observer.next();
   })
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private ids: ItemService) {
    // const headerDict = {'Content-Type':'application/json',
    //   'Accept':'application/json', 'Access-Control-Allow-Headers':'Content-Type',
    //   'Access-Control-Allow-Origin':'http://localhost:4200/*',};
@@ -43,11 +39,15 @@ export class ItemDetailComponent implements OnInit, OnChanges{
     //this.stuff = this.http.get<item>( 'http://localhost:4200/api/Item/GetItems',   
     //{headers : aheaders}).subscribe((res)=>console.log(res.description));
     console.log('showing data');
-    this.getData();
+    this.obItem = this.ids.getData();
   }
 
   ngOnInit(): void {
-  
+    this.obItem
+    .subscribe((response : item[]) => {this.myItems = response;
+     this.myItem = this.myItems[0];
+     console.log("IDeatsC subscribe myItems",this.myItems, Date.now());
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -59,7 +59,7 @@ export class ItemDetailComponent implements OnInit, OnChanges{
 
   getData(){
     console.log('start of getData');
-    this.http.get<item>( 'http://localhost:4200/api/Item/GetItems',   
+    this.http.get<item>( 'http://localhost:4200/api/Item/GetItemsByDealer',   
     ).toPromise().then( data => {  
         for (let key in data)
           {
@@ -68,6 +68,7 @@ export class ItemDetailComponent implements OnInit, OnChanges{
             this.myData.push(data[key])
            }
           } 
+          console.log("first item ",this.myItem[0]);
           this.itemString = JSON.stringify(this.myData[0]);
           this.myItem = JSON.parse(this.itemString);
         })

@@ -31,7 +31,7 @@ itemSelectedEvent = new EventEmitter<item>();
 
  getData() : Observable<item []>  {
     console.log('start of getData');
-    return this.http.get<item[]>( 'http://localhost:4200/api/Item/GetItems', 
+    return this.http.get<item[]>( 'http://localhost:4200/api/Item/GetItemsByDealer', 
                          {headers : this.aHeader});
   
 
@@ -65,7 +65,13 @@ itemSelectedEvent = new EventEmitter<item>();
         
       }
       insertItem(newItem){
-        this.http.post('http://localhost:4200/api/Item/InsertItem1/', newItem)
+        this.http.post('http://localhost:4200/api/Item/InsertItem/', newItem)
+        .subscribe(data=>{console.log(data)},
+        error => console.log(error));
+
+      }
+      updateItem(newItem){
+        this.http.post('http://localhost:4200/api/Item/UpdateItem/', newItem)
         .subscribe(data=>{console.log(data)},
         error => console.log(error));
 

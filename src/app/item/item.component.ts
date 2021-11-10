@@ -21,19 +21,19 @@ export class ItemComponent implements OnInit {
   itemChanged : number = 0;
   selectedItem: item;
   btnFunction: string = "Add item";
+  isUpdate: boolean = false;
  
   
 
   constructor(private fb: FormBuilder, private http:HttpClient, 
     private idc: ItemDetailComponent, private itemService: ItemService) { 
      console.log("in constructor of Item");
- 
    }
 
   ngOnInit()
   { 
     
-this.btnFunction = "Add item"; 
+    this.btnFunction = "Add item"; 
     console.log("itemComponent ngOnInit");
     this.initializeForm();
     console.log("ic is ",this.itemService.selectedItem);
@@ -45,8 +45,10 @@ this.btnFunction = "Add item";
     error => {console.log("ic event subscribe error ", error)}
     );
     if (this.itemService.selectedItem == null)
-    {this.initializeForm()}
+    {  console.log("going to initialize form");
+      this.initializeForm()}
     else{
+      console.log("going to update form");
     this.updateItem(this.itemService.selectedItem);
     }
     console.log("leaving ngo ic");
@@ -54,9 +56,11 @@ this.btnFunction = "Add item";
   }
   initializeForm(): void
   {
- 
+     this.isUpdate = false;
+    console.log("initializing ic");
     this.itemForm = this.fb.group({
-      dealerId: 57,
+      id : 0,
+      dealerId: 1,
       inventoryNumber: '',
       description: '',
       keywords:  '',
@@ -70,15 +74,22 @@ this.btnFunction = "Add item";
       isShippable: true,
       collectionName: '',
       quantity:  0,
+      boughtFrom: ' '
       //soldDate:  '',
       //soldPrice:  0
     })
+    console.log("done initializing ic form");
   }
+  
   updateItem(updItem : item)
   { 
+    this.isUpdate = true;
 this.btnFunction = "Update item"; 
+
+console.log("ic updateItem id = ", updItem.id);
  console.log("ic updateItem ", updItem);
     this.itemForm = this.fb.group({
+      id: updItem.id,
       dealerId: updItem.dealerId,
       inventoryNumber: updItem.inventoryNumber,
       description: updItem.description,
@@ -93,27 +104,38 @@ this.btnFunction = "Update item";
       isShippable: updItem.isShippable,
       collectionName: updItem.collectionName,
       quantity:  updItem.quantity,
+      boughtFrom: updItem.boughtFrom
       //soldDate:  '',
       //soldPrice:  0
-      })
-      
- console.log("ic updatedItem ", updItem);
+      }
+      )
+       
+   console.log("ic updatedItem ", updItem);
     
   }
 
   onSubmit()
   {
+    console.log('adding item');
     //this.itemChanged += 1;
     this.postData = this.itemForm.value;
-    console.log('adding item');
+  
     console.log(this.itemForm);
     console.log(this.postData);
-    console.log('adding item1');
-    this.http.post('http://localhost:4200/api/Item/InsertItem1/', this.postData)
-    .subscribe(data=>{console.log(data)},
-    error => console.log(error));
-    this.idc.getData();
-    window.location.reload();
+    if (this.isUpdate == false) {
+    console.log('adding item1', this.postData);
+    this.itemService.insertItem(this.postData)
+    }
+    else
+    {
+      console.log('updating item1', this.postData);
+      this.itemService.updateItem(this.postData)
+    }
+    //this.http.post('http://localhost:4200/api/Item/InsertItem/', this.postData)
+    //.subscribe(data=>{console.log(data)},
+    //error => console.log(error));
+    //this.itemService.getData();
+    //window.location.reload();
   }
     
     

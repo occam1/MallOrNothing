@@ -9,9 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ItemPictureComponent implements OnInit {
  selectedFile : File = null;  
- token : string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im1hcmtfYV9oYWxsQHlhaG9vLmNvbSIsIm5hbWVpZCI6IjEiLCJyb2xlIjoiMSwxIiwibmJmIjoxNjM1NzA1MzczLCJleHAiOjE2MzU3OTE3NzMsImlhdCI6MTYzNTcwNTM3M30.oqJLiawW35zAciqj-2ZwdMnWqilB83qY_6KK6IHg0Kw';
- auth : string = 'Bearer ' + this.token;
- itemPictureForm: FormGroup;
+itemPictureForm: FormGroup;
 
 
   constructor(private http: HttpClient,private fb: FormBuilder) { }

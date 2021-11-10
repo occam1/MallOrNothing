@@ -11,12 +11,12 @@ import { item } from '../item/item';
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: item[] = [
-  {id: 1, dealerId: 57, inventoryNumber: 'Hydrogen',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1,collectionName:null  },
-  {id: 2, dealerId: 57, inventoryNumber: 'Helium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1,collectionName:null },
-  {id: 3,dealerId: 57,  inventoryNumber: 'Lithium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1,collectionName:null },
-  {id: 4,dealerId: 57,  inventoryNumber: 'Beryllium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1 ,soldDate:null,soldPrice:1,collectionName:null},
-  {id: 5,dealerId: 57,  inventoryNumber: 'Boron',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1, collectionName:null },
-  {id: 6,dealerId: 57,  inventoryNumber: 'Carbon',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1 ,soldDate:null,soldPrice:1,collectionName:null},
+  {id: 1, dealerId: 57, inventoryNumber: 'Hydrogen',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1,collectionName:null,boughtFrom:null  },
+  {id: 2, dealerId: 57, inventoryNumber: 'Helium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1,collectionName:null ,boughtFrom:null},
+  {id: 3,dealerId: 57,  inventoryNumber: 'Lithium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1,collectionName:null,boughtFrom:null },
+  {id: 4,dealerId: 57,  inventoryNumber: 'Beryllium',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1 ,soldDate:null,soldPrice:1,collectionName:null,boughtFrom:null},
+  {id: 5,dealerId: 57,  inventoryNumber: 'Boron',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1,soldDate:null,soldPrice:1, collectionName:null,boughtFrom:null },
+  {id: 6,dealerId: 57,  inventoryNumber: 'Carbon',description:'gas',keywords:'',manufacturer:'',manufacturingLine:'',cost:1,currentPrice:1,minimumPrice:1, pricingPlanId:1,isAvailable:true,isShippable:true,quantity:1 ,soldDate:null,soldPrice:1,collectionName:null,boughtFrom:null},
 ];
 /**
  * Data source for the ItemDetailTable view. This class should
