@@ -32,6 +32,7 @@ itemPictureForm: FormGroup;
       altText:  ''
     })
   }
+  
   onFileUpload(){
     console.log('uploading');
     console.log(this.selectedFile.name)

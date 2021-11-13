@@ -25,6 +25,7 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { AddAuthHeader } from 'src/addAuthHeader';
 import { ItemPictureComponent } from './item/item-picture/item-picture.component';
 import { ItemListComponent } from './item-list/item-list.component';
+import { NgxSplideModule } from 'ngx-splide';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ItemListComponent } from './item-list/item-list.component';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxSplideModule,
     RouterModule.forRoot([{path:"Dealer",component:DealerComponent},
         {path:"Furniture",component:FurnitureComponent},
         {path:"Booth",component:BoothComponent},
@@ -56,8 +58,9 @@ import { ItemListComponent } from './item-list/item-list.component';
         {path:"ItemDetailTable",component:ItemDetailTableComponent},
         {path:"ItemPicture", component:ItemPictureComponent},
         {path:"Store",component:StoreComponent},
+        {path:"Authenticate",component:AuthenticateComponent},
         {path:"ItemList",component:ItemListComponent}
-        
+                
   ]),
     BrowserAnimationsModule,
     MatTableModule,
